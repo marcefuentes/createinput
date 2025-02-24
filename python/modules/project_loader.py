@@ -14,17 +14,8 @@ def discover_projects():
     layouts_dir = Path(__file__).parent / "layouts"
     settings_dir = Path(__file__).parent / "settings"
 
-    try:
-        layouts = set(os.listdir(layouts_dir))
-    except FileNotFoundError:
-        layouts = set()
-        print("No 'layouts' directory found.")
-
-    try:
-        settings = set(os.listdir(settings_dir))
-    except FileNotFoundError:
-        settings = set()
-        print("No 'settings' directory found.")
+    layouts = set(os.listdir(layouts_dir))
+    settings = set(os.listdir(settings_dir))
 
     if not layouts or not settings:
         raise ProjectDiscoveryError("No projects found. 'layouts' or 'settings' empty.")
