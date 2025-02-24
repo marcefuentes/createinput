@@ -1,7 +1,7 @@
 """Dynamically loads the correct project settings."""
 
 import os
-import importlib
+from importlib import import_module
 
 
 def detect_project():
@@ -18,7 +18,7 @@ def load_layout(project_name, layout_name):
     """Dynamically imports the correct layout module."""
 
     try:
-        layout_module = importlib.import_module(f"layouts.{project_name}.{layout_name}")
+        layout_module = import_module(f"layouts.{project_name}.{layout_name}")
     except ModuleNotFoundError:
         raise ValueError(
             f"Project {project_name} has no layout '{layout_name}'."
@@ -35,7 +35,7 @@ def load_settings(project_name):
     """Dynamically imports the correct project settings."""
 
     try:
-        settings_module = importlib.import_module(f"settings.{project_name}")
+        settings_module = import_module(f"settings.{project_name}")
     except ModuleNotFoundError:
         raise ValueError(f"Project '{project_name}' has no settings.")
     settings_function = getattr(settings_module, "return_settings", None)

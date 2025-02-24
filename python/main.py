@@ -29,6 +29,7 @@ def main():
         "base_params": settings["constants"],
     }
 
+    print(f"\nsettings: {settings}\n\nlayout: {layout}\n\nconfig: {config}\n")
 
 if __name__ == "__main__":
     main()
