@@ -1,7 +1,7 @@
 """Basic."""
 
-def basic():
-    """Basic."""
+def return_layout():
+    """Returns the layout dictionary."""
 
     return {
         "dir_variables": {

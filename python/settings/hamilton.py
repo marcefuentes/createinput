@@ -2,7 +2,7 @@
 
 import numpy as np
 
-def settings():
+def return_settings():
     """ Return the settings for the project """
 
     return {

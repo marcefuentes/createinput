@@ -18,27 +18,27 @@ def load_layout(project_name, layout_name):
     """Dynamically imports the correct layout module."""
 
     try:
-        module = importlib.import_module(f"layouts.{project_name}.{layout_name}")
+        layout_module = importlib.import_module(f"layouts.{project_name}.{layout_name}")
     except ModuleNotFoundError:
         raise ValueError(
             f"Project {project_name} has no layout '{layout_name}'."
         )
-    function = getattr(module, layout_name, None)
-    if not function:
+    layout_function = getattr(layout_module, "return_layout", None)
+    if not layout_function:
         raise ValueError(
-            f"Layout '{layout_name}' in project '{project_name}' has no function."
+            f"Layout '{layout_name}' of '{project_name}' has no 'return_layout' function."
         )
-    return function()
+    return layout_function()
 
 
 def load_settings(project_name):
     """Dynamically imports the correct project settings."""
 
     try:
-        module = importlib.import_module(f"settings.{project_name}")
+        settings_module = importlib.import_module(f"settings.{project_name}")
     except ModuleNotFoundError:
         raise ValueError(f"Project '{project_name}' has no settings.")
-    function = getattr(module, "settings", None)
-    if not function:
-        raise ValueError(f"Project '{project_name}' has no settings function.")
-    return function()
+    settings_function = getattr(settings_module, "return_settings", None)
+    if not settings_function:
+        raise ValueError(f"Project '{project_name}' has no 'return settings' function.")
+    return settings_function()

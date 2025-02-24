@@ -1,7 +1,7 @@
 """Basic."""
 
 
-def basic(data):
+def return_layout():
     """Basic."""
 
     data["mechanisms"] = ["none", "none", "d", "d", "p", "pd"]
