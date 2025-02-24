@@ -1,11 +1,16 @@
 """Basic."""
 
 
-def return_layout():
-    """Basic."""
+def get_layout():
+    """Returns the layout dictionary."""
 
-    data["mechanisms"] = ["none", "none", "d", "d", "p", "pd"]
-    data["givens"] = [0.0, 1.0, 0.0, 1.0, 1.0, 1.0]
-    data["pops"] = ["pop_1", "pop_2"]
-
-    return data
+    return {
+        "dir_variables": {
+            "Language": 0,
+            "Shuffle": 0,
+            "Cost": -3,
+            "GroupSize": 7,
+        },
+        "mechanisms": ["none", "none", "d", "d", "p", "pd"],
+        "givens": [0.0, 1.0, 0.0, 1.0, 1.0, 1.0],
+    }

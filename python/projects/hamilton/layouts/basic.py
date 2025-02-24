@@ -1,5 +1,6 @@
 """Basic."""
 
+
 def get_layout():
     """Returns the layout dictionary."""
 
