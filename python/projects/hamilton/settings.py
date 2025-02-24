@@ -2,8 +2,9 @@
 
 import numpy as np
 
+
 def get_settings():
-    """ Return the settings for the project """
+    """Return the settings for the project"""
 
     return {
         "constants": [
@@ -19,4 +20,4 @@ def get_settings():
             "input_file_extension": ".glo",
         },
         "b_values": np.linspace(-7, 3, num=11),
-}
+    }

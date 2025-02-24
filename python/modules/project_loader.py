@@ -4,9 +4,17 @@ import os
 from importlib import import_module
 from pathlib import Path
 
-class LayoutDiscoveryError(Exception): pass
-class SettingsDiscoveryError(Exception): pass
-class GeneratorDiscoveryError(Exception): pass
+
+class LayoutDiscoveryError(Exception):
+    pass
+
+
+class SettingsDiscoveryError(Exception):
+    pass
+
+
+class GeneratorDiscoveryError(Exception):
+    pass
 
 
 def detect_project(project=None):
@@ -34,9 +42,7 @@ def load_generator(project_name):
     try:
         generator_module = import_module(f"projects.{project_name}.functions")
     except ModuleNotFoundError:
-        raise GeneratorDiscoveryError(
-            f"Project {project_name} has no generator."
-        )
+        raise GeneratorDiscoveryError(f"Project {project_name} has no generator.")
 
     generator_function = getattr(generator_module, "generator", None)
 
@@ -74,9 +80,7 @@ def load_settings(project_name):
     try:
         settings_module = import_module(f"projects.{project_name}.settings")
     except ModuleNotFoundError:
-        raise SettingsDiscoveryError(
-            f"Project '{project_name}' has no settings."
-        )
+        raise SettingsDiscoveryError(f"Project '{project_name}' has no settings.")
 
     settings_function = getattr(settings_module, "get_settings", None)
 

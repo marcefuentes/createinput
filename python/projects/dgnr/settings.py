@@ -22,7 +22,6 @@ project = {
         "loges_max": 5.0,
         "num": 3,
     },
-
     "input_file_extension": ".glo",
     "q_b_num": 20,
 }

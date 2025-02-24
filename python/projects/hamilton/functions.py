@@ -35,7 +35,9 @@ def generator(settings, layout):
                         ]
 
                         for pop in layout["Populations"]:
-                            mg_dir = base_dir / mechanism / str(given) / f"pop_{str(pop)}"
+                            mg_dir = (
+                                base_dir / mechanism / str(given) / f"pop_{str(pop)}"
+                            )
                             mg_dir.mkdir(parents=True, exist_ok=True)
 
                             for filename, b in enumerate(settings["b_values"]):
@@ -47,4 +49,3 @@ def generator(settings, layout):
                                 write_file(file_path, params)
                                 print(f"\r{file_path}", end="", flush=True)
                             print()
-

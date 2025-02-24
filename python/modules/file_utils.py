@@ -27,4 +27,3 @@ def write_file(file_path, content):
             f.writelines(content)
     except IOError as e:
         print(f"Error writing {file_path}: {e}")
-
