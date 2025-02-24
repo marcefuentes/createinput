@@ -40,5 +40,7 @@ def main():
         "base_params": settings["constants"],
     }
 
+    print(settings, layout)
+
 if __name__ == "__main__":
     main()
