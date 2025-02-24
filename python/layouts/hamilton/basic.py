@@ -1,10 +1,15 @@
 """Basic."""
 
-
-def basic(data):
+def basic():
     """Basic."""
 
-    data["mechanisms"] = ["none", "none", "d", "d", "p", "pd"]
-    data["givens"] = [0.0, 1.0, 0.0, 1.0, 1.0, 1.0]
-
-    return data
+    return {
+        "dir_variables": {
+            "Language": 0,
+            "Shuffle": 0,
+            "Cost": -3,
+            "GroupSize": 7,
+        },
+        "mechanisms": ["none", "none", "d", "d", "p", "pd"],
+        "givens": [0.0, 1.0, 0.0, 1.0, 1.0, 1.0],
+    }

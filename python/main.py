@@ -25,13 +25,20 @@ def main():
         raise ValueError("Could not determine project. Please use --project.")
 
     # Load the correct project settings and layout
-    project_settings = load_project(project_name)
+    settings_module = load_project(project_name)
     layout_module = load_layout(project_name, args.layout)
 
-    print(f"Running for project: {project_name}, layout: {args.layout}")
-    print(f"Using settings: {project_settings.settings}")
-    print(f"Using layout: {layout_module}")
+    settings = settings_module.settings()
+    layout = layout_module.basic()
 
+    print(f"Running for project: {project_name}, layout: {args.layout}")
+    print(f"Using settings: {settings}")
+    print(f"Using layout: {layout}")
+
+    config = {
+        "ext": settings["file_settings"]["input_file_extension"],
+        "base_dir": create_base_directory(layout),
+    }
 
 if __name__ == "__main__":
     main()
