@@ -4,55 +4,44 @@ import os
 from importlib import import_module
 from pathlib import Path
 
-class ProjectDiscoveryError(Exception): pass
 class LayoutDiscoveryError(Exception): pass
 class SettingsDiscoveryError(Exception): pass
 
-def discover_projects():
-    """Discovers all projects in the 'layouts' directory."""
 
-    layouts_dir = Path(__file__).parent / "layouts"
-    settings_dir = Path(__file__).parent / "settings"
+def detect_project(project=None):
+    """Detects all projects in the projects directory."""
 
-    layouts = set(os.listdir(layouts_dir))
-    settings = set(os.listdir(settings_dir))
+    projects = os.listdir(Path(__file__).parent.parent / "projects")
 
-    if not layouts or not settings:
-        raise ProjectDiscoveryError("No projects found. 'layouts' or 'settings' empty.")
-
-    projects = layouts.intersection(settings)
-
-    return projects
-
-
-def detect_project():
-    """Detects the project based on the execution path."""
-
-    projects = discover_projects()
-
-    path = os.getcwd()
-    for project in projects:
-        if project in path:
+    if project:
+        if project in projects:
             return project
+        raise ValueError(f"Project '{project}' not found in {projects_path}")
 
-    return list(projects)[0]
+    current_path = Path.cwd().resolve()
+
+    for proj in projects:
+        if proj in current_path.parts:
+            return proj
+
+    raise ValueError(f"Could not determine the project. Select one of {projects}")
 
 
 def load_layout(project_name, layout_name):
     """Dynamically imports the correct layout module."""
 
     try:
-        layout_module = import_module(f"layouts.{project_name}.{layout_name}")
+        layout_module = import_module(f"projects.{project_name}.layouts.{layout_name}")
     except ModuleNotFoundError:
         raise LayoutDiscoveryError(
             f"Project {project_name} has no layout '{layout_name}'."
         )
 
-    layout_function = getattr(layout_module, "return_layout", None)
+    layout_function = getattr(layout_module, "get_layout", None)
 
     if not layout_function:
         raise LayoutDiscoveryError(
-            f"Layout '{layout_name}' of '{project_name}' has no 'return_layout' function."
+            f"Layout '{layout_name}' of '{project_name}' has no 'get_layout' function."
         )
 
     return layout_function()
@@ -62,17 +51,17 @@ def load_settings(project_name):
     """Dynamically imports the correct project settings."""
 
     try:
-        settings_module = import_module(f"settings.{project_name}")
+        settings_module = import_module(f"projects.{project_name}.settings")
     except ModuleNotFoundError:
         raise SettingsDiscoveryError(
             f"Project '{project_name}' has no settings."
         )
 
-    settings_function = getattr(settings_module, "return_settings", None)
+    settings_function = getattr(settings_module, "get_settings", None)
 
     if not settings_function:
         raise SettingsDiscoveryError(
-            f"Project '{project_name}' has no 'return settings' function."
+            f"Project '{project_name}' has no 'get_settings' function."
         )
 
     return settings_function()

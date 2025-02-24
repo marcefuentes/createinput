@@ -19,7 +19,7 @@ def main():
     )
     args = parser.parse_args()
 
-    project_name = args.project or detect_project()
+    project_name = detect_project(args.project)
     settings = load_settings(project_name)
     layout = load_layout(project_name, args.layout)
 
