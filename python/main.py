@@ -26,18 +26,19 @@ def main():
 
     # Load the correct project settings and layout
     settings_module = load_project(project_name)
-    layout_module = load_layout(project_name, args.layout)
-
     settings = settings_module.settings()
-    layout = layout_module.basic()
+
+    layout_module = load_layout(project_name, args.layout)
+    layout_function = getattr(layout_module, args.layout, None)
+    if not layout_function:
+        raise ValueError(f"Could not find layout {args.layout} in {project_name}.")
+    layout = layout_function()
 
     config = {
         "ext": settings["file_settings"]["input_file_extension"],
         "base_dir": create_base_directory(layout),
         "base_params": settings["constants"],
     }
-
-    print(config)
 
 if __name__ == "__main__":
     main()
