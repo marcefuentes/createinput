@@ -6,6 +6,7 @@ from pathlib import Path
 
 class LayoutDiscoveryError(Exception): pass
 class SettingsDiscoveryError(Exception): pass
+class GeneratorDiscoveryError(Exception): pass
 
 
 def detect_project(project=None):
@@ -25,6 +26,26 @@ def detect_project(project=None):
             return proj
 
     raise ValueError(f"Could not determine the project. Select one of {projects}")
+
+
+def load_generator(project_name):
+    """Dynamically imports the correct generator module."""
+
+    try:
+        generator_module = import_module(f"projects.{project_name}.functions")
+    except ModuleNotFoundError:
+        raise GeneratorDiscoveryError(
+            f"Project {project_name} has no generator."
+        )
+
+    generator_function = getattr(generator_module, "generator", None)
+
+    if not generator_function:
+        raise GeneratorDiscoveryError(
+            f"Project {project_name} has no 'generator' function."
+        )
+
+    return generator_function
 
 
 def load_layout(project_name, layout_name):

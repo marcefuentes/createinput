@@ -1,14 +1,14 @@
 from pathlib import Path
 
 
-def create_base_directory(layout):
+def create_base_directory(config):
     """Create and return the base output directory path."""
 
     base_parts = [
-        "lang" if layout["dir_variables"]["Language"] else "nolang",
-        "shuffle" if layout["dir_variables"]["Shuffle"] else "noshuffle",
-        f"cost{-int(layout['dir_variables']['Cost'])}",
-        f"{2**layout['dir_variables']['GroupSize']}",
+        "lang" if config["Language"] else "nolang",
+        "shuffle" if config["Shuffle"] else "noshuffle",
+        f"cost{-int(config['Cost'])}",
+        f"{2**config['GroupSize']}",
     ]
     return Path("_".join(base_parts))
 

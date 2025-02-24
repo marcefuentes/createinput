@@ -3,8 +3,7 @@
 """Create input files for simulations."""
 
 import argparse
-from modules.file_utils import create_base_directory, generate_filename, write_file
-from modules.project_loader import detect_project, load_layout, load_settings
+from modules.project_loader import detect_project, load_layout, load_settings, load_generator
 
 
 def main():
@@ -20,16 +19,10 @@ def main():
     args = parser.parse_args()
 
     project_name = detect_project(args.project)
+    generator = load_generator(project_name)
     settings = load_settings(project_name)
     layout = load_layout(project_name, args.layout)
-
-    config = {
-        "ext": settings["file_settings"]["input_file_extension"],
-        "base_dir": create_base_directory(layout),
-        "base_params": settings["constants"],
-    }
-
-    print(f"\nsettings: {settings}\n\nlayout: {layout}\n\nconfig: {config}\n")
+    generator(settings, layout)
 
 if __name__ == "__main__":
     main()
