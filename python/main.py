@@ -34,7 +34,10 @@ def main():
     config = {
         "ext": settings["file_settings"]["input_file_extension"],
         "base_dir": create_base_directory(layout),
+        "base_params": settings["constants"],
     }
+
+    print(config)
 
 if __name__ == "__main__":
     main()
