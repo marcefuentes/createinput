@@ -5,6 +5,8 @@ from importlib import import_module
 from pathlib import Path
 
 class ProjectDiscoveryError(Exception): pass
+class LayoutDiscoveryError(Exception): pass
+class SettingsDiscoveryError(Exception): pass
 
 def discover_projects():
     """Discovers all projects in the 'layouts' directory."""
@@ -50,15 +52,18 @@ def load_layout(project_name, layout_name):
 
     try:
         layout_module = import_module(f"layouts.{project_name}.{layout_name}")
-    except ModuleNotFoundError:
-        raise ValueError(
+    except FileNotFoundError:
+        raise LayoutDiscoveryError(
             f"Project {project_name} has no layout '{layout_name}'."
         )
+
     layout_function = getattr(layout_module, "return_layout", None)
+
     if not layout_function:
         raise ValueError(
             f"Layout '{layout_name}' of '{project_name}' has no 'return_layout' function."
         )
+
     return layout_function()
 
 
@@ -67,9 +72,14 @@ def load_settings(project_name):
 
     try:
         settings_module = import_module(f"settings.{project_name}")
-    except ModuleNotFoundError:
-        raise ValueError(f"Project '{project_name}' has no settings.")
+    except FileNotFoundError:
+        raise SettingsDiscoveryError(
+            f"Project '{project_name}' has no settings."
+        )
+
     settings_function = getattr(settings_module, "return_settings", None)
+
     if not settings_function:
         raise ValueError(f"Project '{project_name}' has no 'return settings' function.")
+
     return settings_function()
