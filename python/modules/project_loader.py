@@ -8,11 +8,14 @@ from pathlib import Path
 class LayoutDiscoveryError(Exception):
     """Raised when the layout module does not contain the correct function."""
 
+
 class SettingsDiscoveryError(Exception):
     """Raised when the settings module does not contain the correct function."""
 
+
 class GeneratorDiscoveryError(Exception):
     """Raised when the generator module does not contain the correct function."""
+
 
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
