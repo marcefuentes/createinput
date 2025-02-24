@@ -3,19 +3,8 @@
 """Create input files for simulations."""
 
 import argparse
-import importlib
-from modules.project_loader import load_project, detect_project
-
-
-def load_layout(project_name, layout_name):
-    """Dynamically imports the correct layout module."""
-
-    try:
-        return importlib.import_module(f"layouts.{project_name}.{layout_name}")
-    except ModuleNotFoundError:
-        raise ValueError(
-            f"Layout '{layout_name}' not found for project '{project_name}'."
-        )
+from modules.file_utils import create_base_directory, generate_filename, write_file
+from modules.project_loader import detect_project, load_layout, load_project
 
 
 def main():

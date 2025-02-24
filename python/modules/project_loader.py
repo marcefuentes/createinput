@@ -14,6 +14,17 @@ def detect_project():
     return None
 
 
+def load_layout(project_name, layout_name):
+    """Dynamically imports the correct layout module."""
+
+    try:
+        return importlib.import_module(f"layouts.{project_name}.{layout_name}")
+    except ModuleNotFoundError:
+        raise ValueError(
+            f"Layout '{layout_name}' not found for project '{project_name}'."
+        )
+
+
 def load_project(project_name):
     """Dynamically imports the correct project settings."""
 
