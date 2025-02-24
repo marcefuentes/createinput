@@ -2,16 +2,47 @@
 
 import os
 from importlib import import_module
+from pathlib import Path
+
+class ProjectDiscoveryError(Exception): pass
+
+def discover_projects():
+    """Discovers all projects in the 'layouts' directory."""
+
+    layouts_dir = Path(__file__).parent / "layouts"
+    settings_dir = Path(__file__).parent / "settings"
+
+    try:
+        layouts = set(os.listdir(layouts_dir))
+    except FileNotFoundError:
+        layouts = set()
+        print("No 'layouts' directory found.")
+
+    try:
+        settings = set(os.listdir(settings_dir))
+    except FileNotFoundError:
+        settings = set()
+        print("No 'settings' directory found.")
+
+    if not layouts or not settings:
+        raise ProjectDiscoveryError("No projects found. 'layouts' or 'settings' empty.")
+
+    projects = layouts.intersection(settings)
+
+    return projects
 
 
 def detect_project():
     """Detects the project based on the execution path."""
 
+    projects = discover_projects()
+
     path = os.getcwd()
-    for project in ["hamilton", "mgnr", "dgnr"]:  # Add more projects here
+    for project in projects:
         if project in path:
             return project
-    return None
+
+    return list(projects)[0]
 
 
 def load_layout(project_name, layout_name):
