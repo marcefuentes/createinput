@@ -6,16 +6,13 @@ from pathlib import Path
 
 
 class LayoutDiscoveryError(Exception):
-    pass
-
+    """Raised when the layout module does not contain the correct function."""
 
 class SettingsDiscoveryError(Exception):
-    pass
-
+    """Raised when the settings module does not contain the correct function."""
 
 class GeneratorDiscoveryError(Exception):
-    pass
-
+    """Raised when the generator module does not contain the correct function."""
 
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
