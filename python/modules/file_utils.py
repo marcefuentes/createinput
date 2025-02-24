@@ -5,10 +5,10 @@ def create_base_directory(layout):
     """Create and return the base output directory path."""
 
     base_parts = [
-        "lang" if layout["Language"] else "nolang",
-        "shuffle" if layout["Shuffle"] else "noshuffle",
-        f"cost{-int(layout['Cost'])}",
-        f"{2**layout['GroupSize']}",
+        "lang" if layout["dir_variables"]["Language"] else "nolang",
+        "shuffle" if layout["dir_variables"]["Shuffle"] else "noshuffle",
+        f"cost{-int(layout['dir_variables']['Cost'])}",
+        f"{2**layout['dir_variables']['GroupSize']}",
     ]
     return Path("_".join(base_parts))
 

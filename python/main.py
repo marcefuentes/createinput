@@ -31,10 +31,6 @@ def main():
     settings = settings_module.settings()
     layout = layout_module.basic()
 
-    print(f"Running for project: {project_name}, layout: {args.layout}")
-    print(f"Using settings: {settings}")
-    print(f"Using layout: {layout}")
-
     config = {
         "ext": settings["file_settings"]["input_file_extension"],
         "base_dir": create_base_directory(layout),
