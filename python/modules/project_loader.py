@@ -52,7 +52,7 @@ def load_layout(project_name, layout_name):
 
     try:
         layout_module = import_module(f"layouts.{project_name}.{layout_name}")
-    except FileNotFoundError:
+    except ModuleNotFoundError:
         raise LayoutDiscoveryError(
             f"Project {project_name} has no layout '{layout_name}'."
         )
@@ -60,7 +60,7 @@ def load_layout(project_name, layout_name):
     layout_function = getattr(layout_module, "return_layout", None)
 
     if not layout_function:
-        raise ValueError(
+        raise LayoutDiscoveryError(
             f"Layout '{layout_name}' of '{project_name}' has no 'return_layout' function."
         )
 
@@ -72,7 +72,7 @@ def load_settings(project_name):
 
     try:
         settings_module = import_module(f"settings.{project_name}")
-    except FileNotFoundError:
+    except ModuleNotFoundError:
         raise SettingsDiscoveryError(
             f"Project '{project_name}' has no settings."
         )
@@ -80,6 +80,8 @@ def load_settings(project_name):
     settings_function = getattr(settings_module, "return_settings", None)
 
     if not settings_function:
-        raise ValueError(f"Project '{project_name}' has no 'return settings' function.")
+        raise SettingsDiscoveryError(
+            f"Project '{project_name}' has no 'return settings' function."
+        )
 
     return settings_function()
