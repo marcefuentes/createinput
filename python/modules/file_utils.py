@@ -1,3 +1,5 @@
+"""Utility functions for file operations."""
+
 from pathlib import Path
 
 

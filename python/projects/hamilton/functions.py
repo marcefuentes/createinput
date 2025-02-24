@@ -1,7 +1,6 @@
 """Functions to generate input files for the model."""
 
 from modules.file_utils import generate_filename, create_base_directory, write_file
-from modules.generate_utils import build_base_parameters
 
 
 def generator(settings, layout):

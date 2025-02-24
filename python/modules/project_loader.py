@@ -20,7 +20,8 @@ class GeneratorDiscoveryError(Exception):
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
 
-    projects = os.listdir(Path(__file__).parent.parent / "projects")
+    projects_path = Path(__file__).parent.parent / "projects"
+    projects = os.listdir(projects_path)
 
     if project:
         if project in projects:
