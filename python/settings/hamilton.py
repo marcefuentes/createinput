@@ -22,3 +22,8 @@ settings = {
     },
     "input_file_extension": ".glo",
 }
+
+def generate_values():
+    """ Generate b values."""
+
+    return np.linspace(settings["b_layout"]["b_min"], settings["b_layout"]["b_max"], settings["b_layout"]["num"])
