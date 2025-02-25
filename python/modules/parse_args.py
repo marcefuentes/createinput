@@ -7,7 +7,9 @@ import os
 def get_available_projects():
     """Return a list of available projects."""
 
-    return [d for d in os.listdir("projects") if os.path.isdir(os.path.join("projects", d))]
+    return [
+        d for d in os.listdir("projects") if os.path.isdir(os.path.join("projects", d))
+    ]
 
 
 def get_available_layouts():
@@ -25,8 +27,8 @@ def parse_args():
 
     available_projects = get_available_projects()
     available_layouts = get_available_layouts()
-    project_help = "Options: {}".format(", ".join(available_projects))
-    layout_help = "Options: {}".format(", ".join(available_layouts))
+    project_help = f"Options: {', '.join(available_projects)}"
+    layout_help = f"Options: {', '.join(available_layouts)}"
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", type=str, help=project_help)

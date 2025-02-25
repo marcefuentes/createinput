@@ -59,7 +59,10 @@ def load_generator(project_name):
 def load_layout(layout_name):
     """Dynamically imports the correct layout module."""
 
-    return load_module_attr(f"layouts.{layout_name}", "get_layout", LayoutDiscoveryError)
+    return load_module_attr(
+        f"layouts.{layout_name}", "get_layout", LayoutDiscoveryError
+    )
+
 
 def load_module_attr(module_name, attr_name, error_class):
     try:
@@ -73,7 +76,10 @@ def load_module_attr(module_name, attr_name, error_class):
 
     return attr()
 
+
 def load_settings(project_name):
     """Dynamically imports the correct project settings."""
 
-    return load_module_attr(f"projects.{project_name}.settings", "get_settings", SettingsDiscoveryError)
+    return load_module_attr(
+        f"projects.{project_name}.settings", "get_settings", SettingsDiscoveryError
+    )
