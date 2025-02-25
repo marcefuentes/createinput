@@ -12,8 +12,8 @@ from modules.project_loader import (
 )
 
 
-def main():
-    """Main function."""
+def parse_args():
+    """Parse command-line arguments."""
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -22,7 +22,11 @@ def main():
     parser.add_argument(
         "--layout", type=str, required=True, help="Layout name (e.g., basic, unit)"
     )
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main(args):
+    """Main function."""
 
     project_name = detect_project(args.project)
     generator = load_generator(project_name)
@@ -32,4 +36,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    args = parse_args()
+    main(args)
