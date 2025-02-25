@@ -7,7 +7,7 @@ from pathlib import Path
 def get_available_projects():
     """Return a list of available projects."""
 
-    projects_path = Path(__file__).parent.parent / "projects"
+    projects_path = Path(__file__).resolve().parent.parent / "projects"
 
     return [d.name for d in projects_path.iterdir() if d.is_dir()]
 
@@ -15,7 +15,7 @@ def get_available_projects():
 def get_available_layouts():
     """Return a list of available layouts."""
 
-    layouts_path = Path(__file__).parent.parent / "layouts"
+    layouts_path = Path(__file__).resolve().parent.parent / "layouts"
 
     return [d.stem for d in layouts_path.iterdir() if d.is_file()]
 
