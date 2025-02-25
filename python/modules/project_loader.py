@@ -43,7 +43,9 @@ def load_generator(project_name):
     try:
         generator_module = import_module(f"projects.{project_name}.functions")
     except ModuleNotFoundError as exc:
-        raise GeneratorDiscoveryError(f"Project {project_name} has no generator.") from exc
+        raise GeneratorDiscoveryError(
+            f"Project {project_name} has no generator."
+        ) from exc
 
     generator_function = getattr(generator_module, "generator", None)
 
@@ -81,7 +83,9 @@ def load_settings(project_name):
     try:
         settings_module = import_module(f"projects.{project_name}.settings")
     except ModuleNotFoundError as exc:
-        raise SettingsDiscoveryError(f"Project '{project_name}' has no settings.") from exc
+        raise SettingsDiscoveryError(
+            f"Project '{project_name}' has no settings."
+        ) from exc
 
     settings_function = getattr(settings_module, "get_settings", None)
 
