@@ -2,24 +2,23 @@
 
 import argparse
 import os
+from pathlib import Path
 
 
 def get_available_projects():
     """Return a list of available projects."""
 
-    return [
-        d for d in os.listdir("projects") if os.path.isdir(os.path.join("projects", d))
-    ]
+    projects_path = Path(__file__).parent.parent / "projects"
+    
+    return [d.name for d in projects_path.iterdir() if d.is_dir()]
 
 
 def get_available_layouts():
     """Return a list of available layouts."""
 
-    return [
-        os.path.splitext(d)[0]
-        for d in os.listdir("layouts")
-        if os.path.isfile(os.path.join("layouts", d))
-    ]
+    layouts_path = Path(__file__).parent.parent / "layouts"
+
+    return [d.stem for d in layouts_path.iterdir() if d.is_file()]
 
 
 def parse_args():
