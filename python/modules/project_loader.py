@@ -19,7 +19,7 @@ class GeneratorDiscoveryError(Exception):
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
 
-    projects_path = Path(__file__).parent.parent / "projects"
+    projects_path = Path(__file__).resolve().parent.parent / "projects"
     projects = {d.name for d in projects_path.iterdir() if d.is_dir()}
 
     if project:
