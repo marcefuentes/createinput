@@ -1,6 +1,5 @@
 """Dynamically loads the correct project settings."""
 
-import os
 from importlib import import_module
 from pathlib import Path
 

@@ -1,7 +1,6 @@
 """Parses command-line arguments."""
 
 import argparse
-import os
 from pathlib import Path
 
 
@@ -9,7 +8,7 @@ def get_available_projects():
     """Return a list of available projects."""
 
     projects_path = Path(__file__).parent.parent / "projects"
-    
+
     return [d.name for d in projects_path.iterdir() if d.is_dir()]
 
 
