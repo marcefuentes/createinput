@@ -28,11 +28,10 @@ def detect_project(project=None):
             return project
         raise ValueError(f"Project '{project}' not found in {projects_path}")
 
-    current_path = Path.cwd().resolve()
-
-    for proj in projects:
-        if proj in current_path.parts:
-            return proj
+    current_parts = set(Path.cwd().resolve().parts)
+    matching_projects = projects.intersection(current_parts)
+    if matching_projects:
+        return matching_projects.pop()
 
     raise ValueError(f"Could not determine the project. Select one of {projects}")
 
