@@ -59,38 +59,21 @@ def load_generator(project_name):
 def load_layout(layout_name):
     """Dynamically imports the correct layout module."""
 
+    return load_module_attr(f"layouts.{layout_name}", "get_layout", LayoutDiscoveryError)
+
+def load_module_attr(module_name, attr_name, error_class):
     try:
-        layout_module = import_module(f"layouts.{layout_name}")
-    except ModuleNotFoundError as exc:
-        raise LayoutDiscoveryError(
-            f"Layout '{layout_name}' not found in layouts."
-        ) from exc
+        module = import_module(module_name)
+    except ModuleNotFoundError:
+        raise error_class(f"Module '{module_name}' not found.")
 
-    layout_function = getattr(layout_module, "get_layout", None)
+    attr = getattr(module, attr_name, None)
+    if not attr:
+        raise error_class(f"Module '{module_name}' has no attribute '{attr_name}'.")
 
-    if not layout_function:
-        raise LayoutDiscoveryError(
-            f"Layout '{layout_name}' has no 'get_layout' function."
-        )
-
-    return layout_function()
-
+    return attr()
 
 def load_settings(project_name):
     """Dynamically imports the correct project settings."""
 
-    try:
-        settings_module = import_module(f"projects.{project_name}.settings")
-    except ModuleNotFoundError as exc:
-        raise SettingsDiscoveryError(
-            f"Project '{project_name}' has no settings."
-        ) from exc
-
-    settings_function = getattr(settings_module, "get_settings", None)
-
-    if not settings_function:
-        raise SettingsDiscoveryError(
-            f"Project '{project_name}' has no 'get_settings' function."
-        )
-
-    return settings_function()
+    return load_module_attr(f"projects.{project_name}.settings", "get_settings", SettingsDiscoveryError)
