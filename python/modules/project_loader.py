@@ -65,10 +65,12 @@ def load_layout(layout_name):
 
 
 def load_module_attr(module_name, attr_name, error_class):
+    """Dynamically imports a module and returns the specified attribute."""
+
     try:
         module = import_module(module_name)
-    except ModuleNotFoundError:
-        raise error_class(f"Module '{module_name}' not found.")
+    except ModuleNotFoundError as exc:
+        raise error_class(f"Module '{module_name}' not found.") from exc
 
     attr = getattr(module, attr_name, None)
     if not attr:
