@@ -24,14 +24,14 @@ def common_generator(generator, settings, layout):
                         f"Cost,{cost}\n",
                         f"GroupSize,{group_size}\n",
                     ]
-                    m_g_generator(generator, settings, layout, dirname_params, base_dir)
+                    mg_generator(generator, settings, layout, dirname_params, base_dir)
 
 
-def m_g_generator(generator, settings, layout, dirname_params, base_dir):
+def mg_generator(generator, settings, layout, dirname_params, base_dir):
     """Generate input files for all parameter combinations."""
 
     for mechanism, given in zip(layout["mechanisms"], layout["Given"]):
-        m_g_params = dirname_params + [
+        mg_params = dirname_params + [
             f"PartnerChoice,{1 if 'p' in mechanism else 0}\n",
             f"Reciprocity,{1 if 'd' in mechanism or 'i' in mechanism else 0}\n",
             f"IndirectR,{1 if 'i' in mechanism else 0}\n",
@@ -42,4 +42,4 @@ def m_g_generator(generator, settings, layout, dirname_params, base_dir):
             mg_dir = base_dir / mechanism / str(given) / f"pop_{str(pop)}"
             mg_dir.mkdir(parents=True, exist_ok=True)
 
-            generator(m_g_params, settings, mg_dir, pop)
+            generator(mg_params, settings, mg_dir, pop)
