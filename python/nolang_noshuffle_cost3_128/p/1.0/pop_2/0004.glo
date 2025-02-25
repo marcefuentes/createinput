@@ -14,4 +14,7 @@ Reciprocity,0
 IndirectR,0
 Given,1.0
 Populations,2
-b,-3.0
+alpha,0.1
+logES,-5.0
+qBlow,0.0
+qBhigh,0.25

@@ -1,4 +1,4 @@
-"""Functions to generate input files for the model."""
+"""Generator fot this project."""
 
 from modules.file_utils import generate_filename, write_file
 
