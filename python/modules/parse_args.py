@@ -14,5 +14,3 @@ def parse_args():
         "--layout", type=str, required=True, help="Layout name (e.g., basic, unit)"
     )
     return parser.parse_args()
-
-

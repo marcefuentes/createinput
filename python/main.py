@@ -12,9 +12,10 @@ from modules.project_loader import (
 )
 
 
-def main(args):
+def main():
     """Main function."""
 
+    args = parse_args()
     project_name = detect_project(args.project)
     generator = load_generator(project_name)
     settings = load_settings(project_name)
@@ -23,5 +24,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    args = parse_args()
-    main(args)
+    main()
