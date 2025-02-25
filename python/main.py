@@ -3,6 +3,7 @@
 """Create input files for simulations."""
 
 import argparse
+from modules.common_generator import common_generator
 from modules.project_loader import (
     detect_project,
     load_layout,
@@ -27,7 +28,7 @@ def main():
     generator = load_generator(project_name)
     settings = load_settings(project_name)
     layout = load_layout(project_name, args.layout)
-    generator(settings, layout)
+    common_generator(generator, settings, layout)
 
 
 if __name__ == "__main__":
