@@ -2,27 +2,14 @@
 
 """Create input files for simulations."""
 
-import argparse
 from modules.common_generator import common_generator
+from modules.parse_args import parse_args
 from modules.project_loader import (
     detect_project,
     load_layout,
     load_settings,
     load_generator,
 )
-
-
-def parse_args():
-    """Parse command-line arguments."""
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--project", type=str, help="Project name (e.g., hamilton, mgnr)"
-    )
-    parser.add_argument(
-        "--layout", type=str, required=True, help="Layout name (e.g., basic, unit)"
-    )
-    return parser.parse_args()
 
 
 def main(args):
