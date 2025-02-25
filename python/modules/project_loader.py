@@ -41,7 +41,7 @@ def load_generator(project_name):
     """Dynamically imports the correct generator module."""
 
     try:
-        generator_module = import_module(f"projects.{project_name}.functions")
+        generator_module = import_module(f"projects.{project_name}.generator")
     except ModuleNotFoundError as exc:
         raise GeneratorDiscoveryError(
             f"Project {project_name} has no generator."
