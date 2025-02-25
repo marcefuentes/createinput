@@ -57,21 +57,21 @@ def load_generator(project_name):
     return generator_function
 
 
-def load_layout(project_name, layout_name):
+def load_layout(layout_name):
     """Dynamically imports the correct layout module."""
 
     try:
-        layout_module = import_module(f"projects.{project_name}.layouts.{layout_name}")
+        layout_module = import_module(f"layouts.{layout_name}")
     except ModuleNotFoundError as exc:
         raise LayoutDiscoveryError(
-            f"Project {project_name} has no layout '{layout_name}'."
+            f"Layout '{layout_name}' not found in layouts."
         ) from exc
 
     layout_function = getattr(layout_module, "get_layout", None)
 
     if not layout_function:
         raise LayoutDiscoveryError(
-            f"Layout '{layout_name}' of '{project_name}' has no 'get_layout' function."
+            f"Layout '{layout_name}' has no 'get_layout' function."
         )
 
     return layout_function()

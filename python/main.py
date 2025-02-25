@@ -27,7 +27,7 @@ def main():
     project_name = detect_project(args.project)
     generator = load_generator(project_name)
     settings = load_settings(project_name)
-    layout = load_layout(project_name, args.layout)
+    layout = load_layout(args.layout)
     common_generator(generator, settings, layout)
 
 
