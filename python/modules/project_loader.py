@@ -42,8 +42,8 @@ def load_generator(project_name):
 
     try:
         generator_module = import_module(f"projects.{project_name}.functions")
-    except ModuleNotFoundError:
-        raise GeneratorDiscoveryError(f"Project {project_name} has no generator.")
+    except ModuleNotFoundError as exc:
+        raise GeneratorDiscoveryError(f"Project {project_name} has no generator.") from exc
 
     generator_function = getattr(generator_module, "generator", None)
 
@@ -60,10 +60,10 @@ def load_layout(project_name, layout_name):
 
     try:
         layout_module = import_module(f"projects.{project_name}.layouts.{layout_name}")
-    except ModuleNotFoundError:
+    except ModuleNotFoundError as exc:
         raise LayoutDiscoveryError(
             f"Project {project_name} has no layout '{layout_name}'."
-        )
+        ) from exc
 
     layout_function = getattr(layout_module, "get_layout", None)
 
@@ -80,8 +80,8 @@ def load_settings(project_name):
 
     try:
         settings_module = import_module(f"projects.{project_name}.settings")
-    except ModuleNotFoundError:
-        raise SettingsDiscoveryError(f"Project '{project_name}' has no settings.")
+    except ModuleNotFoundError as exc:
+        raise SettingsDiscoveryError(f"Project '{project_name}' has no settings.") from exc
 
     settings_function = getattr(settings_module, "get_settings", None)
 
