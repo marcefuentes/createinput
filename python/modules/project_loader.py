@@ -55,15 +55,15 @@ def get_generator_function(project_name):
     return generator_function
 
 
-def load_layout(layout_name):
+def get_layout(layout_name):
     """Dynamically imports the correct layout module."""
 
-    return load_module_attr(
+    return find_module_attr(
         f"layouts.{layout_name}", "get_layout", LayoutDiscoveryError
     )
 
 
-def load_module_attr(module_name, attr_name, error_class):
+def find_module_attr(module_name, attr_name, error_class):
     """Dynamically imports a module and returns the specified attribute."""
 
     try:
@@ -78,9 +78,9 @@ def load_module_attr(module_name, attr_name, error_class):
     return attr()
 
 
-def load_settings(project_name):
+def get_settings(project_name):
     """Dynamically imports the correct project settings."""
 
-    return load_module_attr(
+    return find_module_attr(
         f"projects.{project_name}.settings", "get_settings", SettingsDiscoveryError
     )
