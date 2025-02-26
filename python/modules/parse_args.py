@@ -30,6 +30,6 @@ def parse_args():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--project", type=str, help=project_help)
-    parser.add_argument("--layout", type=str, required=True, help=layout_help)
+    parser.add_argument("--layout", type=str, default="default", help=layout_help)
 
     return parser.parse_args()

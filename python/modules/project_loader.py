@@ -35,7 +35,7 @@ def detect_project(project=None):
     raise ValueError(f"Could not determine the project. Select one of {projects}")
 
 
-def load_generator(project_name):
+def get_generator_function(project_name):
     """Dynamically imports the correct generator module."""
 
     try:
