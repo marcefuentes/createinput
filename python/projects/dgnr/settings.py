@@ -15,6 +15,7 @@ def get_settings():
             "Periods,3\n",
             "MutationRate,0.01\n",
             "DeathRate,-7\n",
+            "Ces,1\n",
         ],
         "file_settings": {
             "input_file_extension": ".glo",

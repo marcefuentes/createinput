@@ -15,9 +15,10 @@ def get_settings():
             "Periods,3\n",
             "MutationRate,0.01\n",
             "DeathRate,-7\n",
+            "Ces,0\n",
         ],
         "file_settings": {
             "input_file_extension": ".glo",
         },
-        "b_values": np.linspace(-7, 3, num=11),
+        "alpha_values": np.linspace(-7, 3, num=11),
     }
