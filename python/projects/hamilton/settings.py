@@ -1,4 +1,4 @@
-""" Settings for the project """
+"""Settings for the project"""
 
 import numpy as np
 
