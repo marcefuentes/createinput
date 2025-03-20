@@ -10,11 +10,11 @@ def parse_args():
 
     available_projects = get_available_projects()
     available_layouts = get_available_layouts()
-    project_help = f"Options: {', '.join(available_projects)}"
-    layout_help = f"Options: {', '.join(available_layouts)}"
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--project", type=str, help=project_help)
-    parser.add_argument("--layout", type=str, default="default", help=layout_help)
+    parser.add_argument("--project", type=str, choices=available_projects)
+    parser.add_argument(
+        "--layout", type=str, default="default", choices=available_layouts
+    )
 
     return parser.parse_args()

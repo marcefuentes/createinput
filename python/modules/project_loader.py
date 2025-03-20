@@ -24,7 +24,7 @@ def detect_project(project=None):
     if project:
         if project in available_projects:
             return project
-        raise ValueError(f"Project '{project}' not found in {projects_path}")
+        raise ValueError(f"Project '{project}' not found")
 
     current_parts = set(Path.cwd().resolve().parts)
     matching_projects = available_projects.intersection(current_parts)
