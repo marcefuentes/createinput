@@ -19,20 +19,52 @@ class GeneratorDiscoveryError(Exception):
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
 
-    projects_path = Path(__file__).resolve().parent.parent / "projects"
-    projects = {d.name for d in projects_path.iterdir() if d.is_dir()}
+    available_projects = set(get_available_projects())
 
     if project:
-        if project in projects:
+        if project in available_projects:
             return project
         raise ValueError(f"Project '{project}' not found in {projects_path}")
 
     current_parts = set(Path.cwd().resolve().parts)
-    matching_projects = projects.intersection(current_parts)
+    matching_projects = available_projects.intersection(current_parts)
     if matching_projects:
         return matching_projects.pop()
 
-    raise ValueError(f"Could not determine the project. Select one of {projects}")
+    raise ValueError(
+        f"Could not determine the project. Select one of: {available_projects}"
+    )
+
+
+def find_module_attr(module_name, attr_name, error_class):
+    """Dynamically imports a module and returns the specified attribute."""
+
+    try:
+        module = import_module(module_name)
+    except ModuleNotFoundError as exc:
+        raise error_class(f"Module '{module_name}' not found.") from exc
+
+    attr = getattr(module, attr_name, None)
+    if not attr:
+        raise error_class(f"Module '{module_name}' has no attribute '{attr_name}'.")
+
+    return attr()
+
+
+def get_available_layouts():
+    """Return a list of available layouts."""
+
+    layouts_path = Path(__file__).resolve().parent.parent / "layouts"
+
+    return [d.stem for d in layouts_path.iterdir() if d.is_file()]
+
+
+def get_available_projects():
+    """Return a list of available projects."""
+
+    projects_path = Path(__file__).resolve().parent.parent / "projects"
+
+    return [d.name for d in projects_path.iterdir() if d.is_dir()]
 
 
 def get_generator_function(project_name):
@@ -58,24 +90,16 @@ def get_generator_function(project_name):
 def get_layout(layout_name):
     """Dynamically imports the correct layout module."""
 
+    available_layouts = get_available_layouts()
+
+    if layout_name not in available_layouts:
+        raise LayoutDiscoveryError(
+            f"Layout '{layout_name}' not found. Select one of: {' '.join(available_layouts)}"
+        )
+
     return find_module_attr(
         f"layouts.{layout_name}", "get_layout", LayoutDiscoveryError
     )
-
-
-def find_module_attr(module_name, attr_name, error_class):
-    """Dynamically imports a module and returns the specified attribute."""
-
-    try:
-        module = import_module(module_name)
-    except ModuleNotFoundError as exc:
-        raise error_class(f"Module '{module_name}' not found.") from exc
-
-    attr = getattr(module, attr_name, None)
-    if not attr:
-        raise error_class(f"Module '{module_name}' has no attribute '{attr_name}'.")
-
-    return attr()
 
 
 def get_settings(project_name):
