@@ -20,6 +20,7 @@ def main():
     generator = get_generator_function(project_name)
     settings = get_settings(project_name)
     layout = get_layout(args.layout)
+
     common_generator(generator, settings, layout)
 
 
