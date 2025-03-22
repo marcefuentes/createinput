@@ -1,7 +1,6 @@
 """Parses command-line arguments."""
 
 import argparse
-from pathlib import Path
 from modules.project_loader import get_available_projects, get_available_layouts
 
 
