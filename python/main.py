@@ -5,10 +5,9 @@
 from modules.common_generator import common_generator
 from modules.parse_args import parse_args
 from modules.project_loader import (
-    detect_project,
+    get_generator_function,
     get_layout,
     get_settings,
-    get_generator_function,
 )
 
 
@@ -16,9 +15,8 @@ def main():
     """Main function."""
 
     args = parse_args()
-    project_name = detect_project(args.project)
-    generator = get_generator_function(project_name)
-    settings = get_settings(project_name)
+    generator = get_generator_function(args.project)
+    settings = get_settings(args.project)
     layout = get_layout(args.layout)
 
     common_generator(generator, settings, layout)

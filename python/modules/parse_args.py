@@ -1,7 +1,11 @@
 """Parses command-line arguments."""
 
 import argparse
-from modules.project_loader import get_available_projects, get_available_layouts
+from modules.project_loader import (
+    detect_project,
+    get_available_projects,
+    get_available_layouts,
+)
 
 
 def parse_args():
@@ -16,4 +20,7 @@ def parse_args():
         "--layout", type=str, default="default", choices=available_layouts
     )
 
-    return parser.parse_args()
+    args = parser.parse_args()
+    args.project = detect_project(args.project)
+
+    return args
