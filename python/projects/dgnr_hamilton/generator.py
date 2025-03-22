@@ -12,9 +12,9 @@ def generator(mg_params, settings, mg_dir, pop):
         params = mg_params + [
             f"Populations,{pop}\n",
             f"alpha,{alpha}\n",
-            f"logES,0\n",
-            f"qBlow,0\n",
-            f"qBhigh,0\n",
+            "logES,0\n",
+            "qBlow,0\n",
+            "qBhigh,0\n",
         ]
         write_file(file_path, params)
         print(f"\r{file_path}", end="", flush=True)
