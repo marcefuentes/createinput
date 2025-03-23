@@ -2,22 +2,25 @@
 
 """Create input files for simulations."""
 
+from collections.abc import Callable
+
 from modules.common_generator import common_generator
 from modules.parse_args import parse_args
-from modules.project_loader import (
-    get_generator_function,
-    get_layout,
-    get_settings,
-)
+from modules.project_loader import get_module_attribute
 
 
 def main():
     """Main function."""
 
     args = parse_args()
-    generator = get_generator_function(args.project)
-    settings = get_settings(args.project)
-    layout = get_layout(args.layout)
+    print(f"Projetc: {args.project}, layout: {args.layout}")
+    generator = get_module_attribute(
+        f"projects.{args.project}.generator", "generator", Callable
+    )
+    settings = get_module_attribute(
+        f"projects.{args.project}.settings", "settings", dict
+    )
+    layout = get_module_attribute(f"layouts.{args.layout}", "layout", dict)
 
     common_generator(generator, settings, layout)
 
