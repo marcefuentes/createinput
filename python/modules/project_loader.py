@@ -67,22 +67,18 @@ def get_available_projects():
     return [d.name for d in projects_path.iterdir() if d.is_dir()]
 
 
-def get_generator_function(project_name):
+def get_generator_function(project):
     """Dynamically imports the correct generator module."""
 
     try:
-        generator_module = import_module(f"projects.{project_name}.generator")
+        generator_module = import_module(f"projects.{project}.generator")
     except ModuleNotFoundError as exc:
-        raise GeneratorDiscoveryError(
-            f"Project {project_name} has no generator."
-        ) from exc
+        raise GeneratorDiscoveryError(f"Project {project} has no generator.") from exc
 
     generator_function = getattr(generator_module, "generator", None)
 
     if not generator_function:
-        raise GeneratorDiscoveryError(
-            f"Project {project_name} has no 'generator' function."
-        )
+        raise GeneratorDiscoveryError(f"Project {project} has no 'generator' function.")
 
     return generator_function
 
@@ -102,9 +98,9 @@ def get_layout(layout_name):
     )
 
 
-def get_settings(project_name):
+def get_settings(project):
     """Dynamically imports the correct project settings."""
 
     return find_module_attr(
-        f"projects.{project_name}.settings", "get_settings", SettingsDiscoveryError
+        f"projects.{project}.settings", "get_settings", SettingsDiscoveryError
     )
