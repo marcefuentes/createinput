@@ -7,7 +7,7 @@ from pathlib import Path
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
 
-    available_projects = set(get_available_projects())
+    available_projects = set(get_available("projects"))
 
     if project:
         if project in available_projects:
@@ -24,18 +24,11 @@ def detect_project(project=None):
     )
 
 
-def get_available_projects():
+def get_available(options):
     """Return a list of available projects."""
 
-    projects_path = Path(__file__).resolve().parent.parent / "projects"
+    projects_path = Path(__file__).resolve().parent.parent / options
     return [d.name for d in projects_path.iterdir() if d.is_dir()]
-
-
-def get_available_layouts():
-    """Return a list of available layouts."""
-
-    layouts_path = Path(__file__).resolve().parent.parent / "layouts"
-    return [d.stem for d in layouts_path.iterdir() if d.is_file()]
 
 
 def get_module_attribute(module_path, attr_name):
@@ -50,7 +43,6 @@ def get_module_attribute(module_path, attr_name):
     """
 
     module = import_module(module_path)
-
     attr = getattr(module, attr_name, None)
 
     return attr
