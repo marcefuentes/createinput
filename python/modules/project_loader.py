@@ -31,7 +31,7 @@ def get_available(options):
     return [d.name for d in projects_path.iterdir() if d.is_dir()]
 
 
-def get_module_attribute(module_path, attr_name):
+def get_module_attr(module_path, attr_name):
     """Dynamically imports a module and retrieves the specified attribute.
 
     Args:
