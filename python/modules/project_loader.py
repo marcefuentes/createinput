@@ -48,7 +48,7 @@ def find_module_attr(module_name, attr_name, error_class):
     if not attr:
         raise error_class(f"Module '{module_name}' has no attribute '{attr_name}'.")
 
-    return attr()
+    return attr
 
 
 def get_available_layouts():
@@ -93,14 +93,12 @@ def get_layout(layout_name):
             f"Layout '{layout_name}' not found. Select one of: {' '.join(available_layouts)}"
         )
 
-    return find_module_attr(
-        f"layouts.{layout_name}", "get_layout", LayoutDiscoveryError
-    )
+    return find_module_attr(f"layouts.{layout_name}", "layout", LayoutDiscoveryError)
 
 
 def get_settings(project):
     """Dynamically imports the correct project settings."""
 
     return find_module_attr(
-        f"projects.{project}.settings", "get_settings", SettingsDiscoveryError
+        f"projects.{project}.settings", "settings", SettingsDiscoveryError
     )
