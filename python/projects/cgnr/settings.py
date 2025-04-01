@@ -25,7 +25,8 @@ settings = {
         "Runs,30\n",
         "Time,21\n",
         "Periods,3\n",
-        "MutationSize,-6\n",
+        "qBMutationSize,-6\n",
+        "GrainMutationSize,-6\n",
         "DeathRate,-7\n",
     ],
     "file_settings": {
