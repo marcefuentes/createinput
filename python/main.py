@@ -4,7 +4,6 @@
 
 from modules.common_generator import common_generator
 from modules.parse_args import parse_args
-from modules.project_loader import get_module_attr
 
 
 def main():
@@ -12,11 +11,8 @@ def main():
 
     args = parse_args()
     print(f"Projetc: {args.project}, layout: {args.layout}")
-    generator = get_module_attr(f"projects.{args.project}.generator", "generator")
-    settings = get_module_attr(f"projects.{args.project}.settings", "settings")
-    layout = get_module_attr(f"projects.{args.project}.layouts.{args.layout}", "layout")
 
-    common_generator(generator, settings, layout)
+    common_generator(args.generator_function, args.settings, args.layout_function)
 
 
 if __name__ == "__main__":
