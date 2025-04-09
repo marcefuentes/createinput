@@ -28,7 +28,15 @@ def get_available(options):
     """Return a list of available projects."""
 
     projects_path = Path(__file__).resolve().parent.parent / options
-    return [d.name for d in projects_path.iterdir() if d.is_dir()]
+    return sorted(d.name for d in projects_path.iterdir() if d.is_dir())
+
+
+def get_available_layouts(options):
+    """Return a list of available projects."""
+
+    projects_path = Path(__file__).resolve().parent.parent / options
+    all_files = [f.name for f in projects_path.iterdir() if f.is_file()]
+    return sorted(f[:-3] for f in all_files if not f.startswith("__"))
 
 
 def get_module_attr(module_path, attr_name):
