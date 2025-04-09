@@ -20,10 +20,13 @@ def parse_args():
         "--layout",
         type=str,
         default="default",
-        choices=get_available("layouts", type_="file"),
     )
 
     args = parser.parse_args()
     args.project = detect_project(args.project)
+
+    available_layouts = get_available(f"projects/{args.project}/layouts", type_="file")
+    if args.layout not in available_layouts:
+        parser.error(f"--layout must be one of: {', '.join(available_layouts)}")
 
     return args
