@@ -14,13 +14,13 @@ def parse_args():
     parser.add_argument(
         "--project",
         type=str,
-        choices=get_available("projects"),
+        choices=get_available("projects", type_="dir"),
     )
     parser.add_argument(
         "--layout",
         type=str,
         default="default",
-        choices=get_available_layouts("layouts", type_="file"),
+        choices=get_available("layouts", type_="file"),
     )
 
     args = parser.parse_args()
