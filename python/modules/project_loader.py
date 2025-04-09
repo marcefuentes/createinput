@@ -7,7 +7,7 @@ from pathlib import Path
 def detect_project(project=None):
     """Detects all projects in the projects directory."""
 
-    available_projects = set(get_available("projects"))
+    available_projects = set(get_available("projects", type_="dir"))
 
     if project:
         if project in available_projects:
