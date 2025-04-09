@@ -20,7 +20,7 @@ def parse_args():
         "--layout",
         type=str,
         default="default",
-        choices=get_available_layouts("layouts"),
+        choices=get_available_layouts("layouts", type_="file"),
     )
 
     args = parser.parse_args()

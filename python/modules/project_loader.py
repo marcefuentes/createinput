@@ -24,17 +24,15 @@ def detect_project(project=None):
     )
 
 
-def get_available(options):
+def get_available(options, type_="dir"):
     """Return a list of available projects."""
 
     projects_path = Path(__file__).resolve().parent.parent / options
-    return sorted(d.name for d in projects_path.iterdir() if d.is_dir())
+    if type_ == "dir":
+        return sorted(d.name for d in projects_path.iterdir() if d.is_dir())
+    elif type_ == "file":
+        return sorted(f.name for f in projects_path.iterdir() if f.is_file())
 
-
-def get_available_layouts(options):
-    """Return a list of available projects."""
-
-    layouts_path = Path(__file__).resolve().parent.parent / options
 
 def get_module_attr(module_path, attr_name):
     """Dynamically imports a module and retrieves the specified attribute.
