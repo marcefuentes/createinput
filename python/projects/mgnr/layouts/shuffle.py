@@ -7,5 +7,5 @@ layout = {
     "GroupSize": [7],
     "mechanisms": ["none", "none", "d", "d", "p", "pd"],
     "Given": [0.0, 1.0, 0.0, 1.0, 1.0, 1.0],
-    "Populations": [1, 2],
+    "Populations": [2],
 }
