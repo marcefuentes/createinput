@@ -31,7 +31,7 @@ def get_available(options):
     return sorted(d.name for d in projects_path.iterdir() if d.is_dir())
 
 
-def get_available_layouts(options):
+def get_available_layouts(options):  # Not used
     """Return a list of available projects."""
 
     projects_path = Path(__file__).resolve().parent.parent / options
