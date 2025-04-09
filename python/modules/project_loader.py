@@ -31,7 +31,7 @@ def get_available(options, type_="dir"):
     if type_ == "dir":
         return sorted(d.name for d in projects_path.iterdir() if d.is_dir())
     elif type_ == "file":
-        return sorted(f.name for f in projects_path.iterdir() if f.is_file())
+        return sorted(f.stem for f in projects_path.iterdir() if f.is_file())
 
 
 def get_module_attr(module_path, attr_name):
