@@ -14,7 +14,7 @@ def main():
     print(f"Projetc: {args.project}, layout: {args.layout}")
     generator = get_module_attr(f"projects.{args.project}.generator", "generator")
     settings = get_module_attr(f"projects.{args.project}.settings", "settings")
-    layout = get_module_attr(f"layouts.{args.layout}", "layout")
+    layout = get_module_attr(f"projects.{args.project}.layouts.{args.layout}", "layout")
 
     common_generator(generator, settings, layout)
 
