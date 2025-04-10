@@ -1,13 +1,7 @@
 """Settings for the project"""
 
-import numpy as np
+from projects.dgnr_hamilton.utils import generate_arrays
 from settings.parameters import parameters
-
-
-def generate_arrays():
-    """Generate arrays for the project."""
-
-    return np.linspace(-7, 3, 11)
 
 
 def setup():

@@ -12,7 +12,6 @@ def common_generator():
     params = parameters["constants"]
     config = {}
 
-    print(layout)
     for lang in layout["Language"]:
         config["Language"] = lang
         for shuffle in layout["Shuffle"]:
