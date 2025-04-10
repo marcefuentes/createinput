@@ -10,7 +10,7 @@ def main():
     """Main function."""
 
     args = parse_args()
-    print(f"Projetc: {args.project}, layout: {args.layout}")
+    print(f"Project: {args.project}, layout: {args.layout}")
 
     common_generator(args.generator_function, args.settings, args.layout_function)
 
