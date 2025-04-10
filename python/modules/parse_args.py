@@ -7,9 +7,15 @@ from modules.project_loader import (
     get_module_attr,
 )
 
+_args = None
+
 
 def parse_args():
     """Parse command-line arguments."""
+
+    global _args
+    if _args is not None:
+        return _args
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -23,22 +29,22 @@ def parse_args():
         default="default",
     )
 
-    args = parser.parse_args()
-    args.project = detect_project(args.project)
+    _args = parser.parse_args()
+    _args.project = detect_project(_args.project)
 
-    available_layouts = get_available(f"projects/{args.project}/layouts", type_="file")
-    if args.layout not in available_layouts:
+    available_layouts = get_available(f"projects/{_args.project}/layouts", type_="file")
+    if _args.layout not in available_layouts:
         parser.error(f"--layout must be one of: {', '.join(available_layouts)}")
 
     # Load project-specific function and settings
-    args.generator_function = get_module_attr(
-        f"projects.{args.project}.generator", "generator"
+    _args.generator_function = get_module_attr(
+        f"projects.{_args.project}.generator", "generator"
     )
-    args.layout_function = get_module_attr(
-        f"projects.{args.project}.layouts.{args.layout}", "setup"
+    _args.layout_function = get_module_attr(
+        f"projects.{_args.project}.layouts.{_args.layout}", "setup"
     )
-    args.parameters_function = get_module_attr(
-        f"projects.{args.project}.settings", "setup"
+    _args.parameters_function = get_module_attr(
+        f"projects.{_args.project}.settings", "setup"
     )
 
-    return args
+    return _args
