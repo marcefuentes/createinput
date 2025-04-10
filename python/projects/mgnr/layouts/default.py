@@ -1,11 +1,10 @@
 """Basic."""
 
-layout = {
-    "Language": [0],
-    "Shuffle": [0],
-    "Cost": [-15],
-    "GroupSize": [7],
-    "mechanisms": ["none", "none", "d", "d", "p", "pd"],
-    "Given": [0.0, 1.0, 0.0, 1.0, 1.0, 1.0],
-    "Populations": [1, 2],
-}
+from settings.layout import layout
+
+
+def setup():
+    """Setup the layout."""
+
+    layout["Cost"] = [-15]
+    layout["Populations"] = [2]

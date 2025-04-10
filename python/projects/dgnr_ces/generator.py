@@ -1,17 +1,18 @@
 """Generator fot this project."""
 
 from modules.file_utils import generate_filename, write_file
+from settings.parameters import parameters
 
 
-def generator(mg_params, settings, mg_dir, pop):
+def generator(mg_params, mg_dir, pop):
     """Main function to generate input files for all parameter combinations."""
 
-    ext = settings["file_settings"]["input_file_extension"]
+    ext = parameters["file_settings"]["input_file_extension"]
 
     filename = 0
 
-    for alpha, loges in settings["ces_pairs"]:
-        for q_blow, q_bhigh in settings["q_b_pairs"]:
+    for alpha, loges in parameters["ces_pairs"]:
+        for q_blow, q_bhigh in parameters["q_b_pairs"]:
             file_path = mg_dir / generate_filename(filename, ext)
             params = mg_params + [
                 f"Populations,{pop}\n",

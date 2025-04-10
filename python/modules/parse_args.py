@@ -30,13 +30,15 @@ def parse_args():
     if args.layout not in available_layouts:
         parser.error(f"--layout must be one of: {', '.join(available_layouts)}")
 
-    # Load project-specific functions
+    # Load project-specific function and settings
     args.generator_function = get_module_attr(
         f"projects.{args.project}.generator", "generator"
     )
     args.layout_function = get_module_attr(
-        f"projects.{args.project}.layouts.{args.layout}", "layout"
+        f"projects.{args.project}.layouts.{args.layout}", "setup"
     )
-    args.settings = get_module_attr(f"projects.{args.project}.settings", "settings")
+    args.parameters_function = get_module_attr(
+        f"projects.{args.project}.settings", "setup"
+    )
 
     return args

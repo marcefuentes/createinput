@@ -1,6 +1,7 @@
 """Settings for the project"""
 
 import numpy as np
+from settings.parameters import parameters
 
 
 def generate_pairs_ces():
@@ -25,8 +26,10 @@ def generate_pairs_q_b():
     return pairs
 
 
-settings = {
-    "constants": [
+def setup():
+    """Adapt the parameters to the project."""
+
+    parameters["constants"] = [
         "Seed,1\n",
         "N,12\n",
         "Runs,30\n",
@@ -35,10 +38,9 @@ settings = {
         "MutationRate,0.01\n",
         "DeathRate,-7\n",
         "Ces,1\n",
-    ],
-    "file_settings": {
+    ]
+    parameters["file_settings"] = {
         "input_file_extension": ".glo",
-    },
-    "ces_pairs": generate_pairs_ces(),
-    "q_b_pairs": generate_pairs_q_b(),
-}
+    }
+    parameters["ces_pairs"] = generate_pairs_ces()
+    parameters["q_b_pairs"] = generate_pairs_q_b()

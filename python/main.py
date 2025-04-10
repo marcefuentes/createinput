@@ -9,10 +9,10 @@ from modules.parse_args import parse_args
 def main():
     """Main function."""
 
-    args = parse_args()
-    print(f"Project: {args.project}, layout: {args.layout}")
+    print(f"Project: {parse_args().project}, layout: {parse_args().layout}")
 
-    parse_args().setup()
+    parse_args().parameters_function()
+    parse_args().layout_function()
 
     common_generator()
 

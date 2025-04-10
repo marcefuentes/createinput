@@ -1,7 +1,7 @@
 """Settings for the project"""
 
 import numpy as np
-from settings.settings import settings
+from settings.parameters import parameters
 
 
 def generate_arrays():
@@ -19,10 +19,10 @@ def generate_pairs_ces():
     return [(alpha, loges) for alpha in alphas for loges in logess]
 
 
-def change_settings():
-    """Adapt the settings to the project"""
+def setup():
+    """Adapt the parameters to the project"""
 
-    settings["constants"] = (
+    parameters["constants"] = (
         [
             "Seed,1\n",
             "N,12\n",
@@ -34,7 +34,7 @@ def change_settings():
             "DeathRate,-7\n",
         ],
     )
-    settings["file_settings"] = {
+    parameters["file_settings"] = {
         "input_file_extension": ".glo",
     }
-    settings["ces_pairs"] = generate_pairs_ces()
+    parameters["ces_pairs"] = generate_pairs_ces()
