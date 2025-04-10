@@ -12,7 +12,9 @@ def main():
     args = parse_args()
     print(f"Project: {args.project}, layout: {args.layout}")
 
-    common_generator(args.generator_function, args.settings, args.layout_function)
+    parse_args().setup()
+
+    common_generator()
 
 
 if __name__ == "__main__":

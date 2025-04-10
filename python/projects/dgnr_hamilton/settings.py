@@ -1,10 +1,19 @@
 """Settings for the project"""
 
 import numpy as np
+from settings.settings import settings
 
 
-settings = {
-    "constants": [
+def generate_arrays():
+    """Generate arrays for the project."""
+
+    alpha_values = np.linspace(-7, 3, 11)
+
+
+def change_settings():
+    """Adapt the settings to the project"""
+
+    settings["constants"] = [
         "Seed,1\n",
         "N,12\n",
         "Runs,30\n",
@@ -13,9 +22,8 @@ settings = {
         "MutationRate,0.01\n",
         "DeathRate,-7\n",
         "Ces,0\n",
-    ],
-    "file_settings": {
+    ]
+    settings["file_settings"] = {
         "input_file_extension": ".glo",
-    },
-    "alpha_values": np.linspace(-7, 3, num=11),
-}
+    }
+    settings["alpha_values"] = generate_arrays()

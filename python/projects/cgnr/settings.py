@@ -1,6 +1,7 @@
 """Settings for the project"""
 
 import numpy as np
+from settings.settings import settings
 
 
 def generate_arrays():
@@ -18,19 +19,22 @@ def generate_pairs_ces():
     return [(alpha, loges) for alpha in alphas for loges in logess]
 
 
-settings = {
-    "constants": [
-        "Seed,1\n",
-        "N,12\n",
-        "Runs,30\n",
-        "Time,21\n",
-        "Periods,3\n",
-        "qBMutationSize,-6\n",
-        "GrainMutationSize,-6\n",
-        "DeathRate,-7\n",
-    ],
-    "file_settings": {
+def change_settings():
+    """Adapt the settings to the project"""
+
+    settings["constants"] = (
+        [
+            "Seed,1\n",
+            "N,12\n",
+            "Runs,30\n",
+            "Time,21\n",
+            "Periods,3\n",
+            "qBMutationSize,-6\n",
+            "GrainMutationSize,-6\n",
+            "DeathRate,-7\n",
+        ],
+    )
+    settings["file_settings"] = {
         "input_file_extension": ".glo",
-    },
-    "ces_pairs": generate_pairs_ces(),
-}
+    }
+    settings["ces_pairs"] = generate_pairs_ces()
