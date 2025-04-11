@@ -3,7 +3,8 @@
 import argparse
 from modules.project_loader import (
     detect_project,
-    get_available,
+    get_available_layouts,
+    get_available_projects,
     get_module_attr,
 )
 
@@ -18,7 +19,7 @@ def parse_args():
     parser.add_argument(
         "--project",
         type=str,
-        choices=get_available("projects", type_="dir"),
+        choices=get_available_projects(),
     )
     parser.add_argument(
         "--layout",
@@ -29,7 +30,7 @@ def parse_args():
     args = parser.parse_args()
     args.project = detect_project(args.project)
 
-    available_layouts = get_available(f"projects/{args.project}/layouts", type_="file")
+    available_layouts = get_available_layouts(args.project)
     if args.layout not in available_layouts:
         parser.error(f"--layout must be one of: {', '.join(available_layouts)}")
 
