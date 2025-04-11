@@ -1,6 +1,6 @@
 """Settings for the project"""
 
-from projects.cgnr.utils import generate_pairs_ces
+from projects.cgnr.ces_utils import generate_pairs_ces
 from settings.parameters import parameters
 
 
