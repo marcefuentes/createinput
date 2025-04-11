@@ -35,7 +35,7 @@ def get_available(options, type_="dir"):
     return sorted(f.stem for f in projects_path.iterdir() if f.is_file())
 
 
-def get_module_attr(module_path, attr_name):
+def get_module_attr(project, module_path, attr_name):
     """Dynamically imports a module and retrieves the specified attribute.
 
     Args:
@@ -46,7 +46,7 @@ def get_module_attr(module_path, attr_name):
         The requested attribute if found.
     """
 
-    module = import_module(module_path)
+    module = import_module(f"projects.{project}.{module_path}")
     attr = getattr(module, attr_name, None)
 
     return attr

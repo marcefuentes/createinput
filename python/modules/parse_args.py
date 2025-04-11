@@ -34,15 +34,11 @@ def parse_args():
         parser.error(f"--layout must be one of: {', '.join(available_layouts)}")
 
     # Load project-specific function and settings
-    args.generator_function = get_module_attr(
-        f"projects.{args.project}.generator", "generator"
-    )
+    args.generator_function = get_module_attr(args.project, "generator", "generator")
     args.layout_function = get_module_attr(
-        f"projects.{args.project}.layouts.{args.layout}", "setup"
+        args.project, f"layouts.{args.layout}", "setup"
     )
-    args.parameters_function = get_module_attr(
-        f"projects.{args.project}.settings", "setup"
-    )
+    args.parameters_function = get_module_attr(args.project, "settings", "setup")
 
     parse_args.cache_args = args
     return args
