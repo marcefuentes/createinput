@@ -12,8 +12,8 @@ from modules.project_loader import (
 def parse_args():
     """Parse command-line arguments."""
 
-    if hasattr(parse_args, "args_cache"):
-        return parse_args.args_cache
+    if hasattr(parse_args, "cache"):
+        return parse_args.cache
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -41,5 +41,5 @@ def parse_args():
     )
     args.parameters_function = get_module_attr(args.project, "settings", "setup")
 
-    parse_args.cache_args = args
+    parse_args.cache = args
     return args
