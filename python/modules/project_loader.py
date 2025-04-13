@@ -27,9 +27,10 @@ def detect_project(project=None):
 def get_available_layouts(project):
     """Returns available layouts, preferring project over base_gnr."""
 
-    base_path = Path(__file__).resolve().parent.parent / "projects"
-    layout_files = lambda p: {f.stem for f in p.glob("*.py") if f.is_file()}
+    def layout_files(path):
+        return {f.stem for f in path.glob("*.py") if f.is_file()}
 
+    base_path = Path(__file__).resolve().parent.parent / "projects"
     project_path = base_path / project / "layouts"
     base_path = base_path / "base_gnr" / "layouts"
 
