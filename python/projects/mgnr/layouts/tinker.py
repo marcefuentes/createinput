@@ -10,3 +10,4 @@ def setup():
     default_setup()
     layout["shuffles"] = [0, 1]
     layout["mechanisms"] = ["i", "pi"]
+    layout["givens"] = ["1.0", "1.0"]
