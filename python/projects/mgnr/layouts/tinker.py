@@ -8,6 +8,6 @@ def setup():
     """Setup the layout."""
 
     default_setup()
-    layout["shuffles"] = [0, 1]
+    layout["Shuffle"] = [0, 1]
     layout["mechanisms"] = ["i", "pi"]
-    layout["givens"] = ["1.0", "1.0"]
+    layout["Given"] = ["1.0", "1.0"]
