@@ -1,6 +1,6 @@
 """Settings for the project"""
 
-from projects.dgnr_hamilton.utils import generate_arrays
+from projects.hamilton.utils import generate_arrays
 from settings.parameters import parameters
 
 
